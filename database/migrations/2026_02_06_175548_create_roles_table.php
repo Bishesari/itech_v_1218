@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-
-            $table->string('name', 30)->unique();   // founder, institute_admin, branch_manager
-            $table->string('title', 50);            // موسس، ادمین موسسه، مدیر شعبه
-
+            $table->string('name_en', 50)->unique();
+            $table->string('name_fa', 50)->unique();
             // سطح نقش
-            $table->enum('scope', ['institute', 'branch']);
-
+            $table->enum('scope', ['system', 'institute', 'branch']);
+            $table->string('color', 20)->nullable();
             $table->boolean('is_active')->default(true);
 
             $table->timestamps();

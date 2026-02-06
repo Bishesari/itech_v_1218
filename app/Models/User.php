@@ -37,10 +37,41 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
     public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(Contact::class)
             ->withPivot('is_primary')
             ->withTimestamps();
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'institute_user')
+            ->withPivot(['institute_id', 'branch_id', 'is_active'])
+            ->withTimestamps();
+    }
+
+    public function institutes(): BelongsToMany
+    {
+        return $this->belongsToMany(Institute::class, 'institute_user')
+            ->distinct();
+    }
+
+    public function branches(): BelongsToMany
+    {
+        return $this->belongsToMany(Branch::class, 'institute_user')
+            ->distinct();
+    }
+
+    public function hasRole(string $role, ?Institute $institute = null, ?Branch $branch = null): bool
+    {
+        return $this->roles()
+            ->where('name_en', $role)
+            ->when($institute, fn ($q) => $q->wherePivot('institute_id', $institute->id)
+            )
+            ->when($branch, fn ($q) => $q->wherePivot('branch_id', $branch->id)
+            )
+            ->exists();
     }
 }
