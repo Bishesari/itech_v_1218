@@ -32,10 +32,6 @@ class Profile extends Model
         'postal_code',
         'image_url',
     ];
-
-    /**
-     * هر پروفایل متعلق به یک کاربر است
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
