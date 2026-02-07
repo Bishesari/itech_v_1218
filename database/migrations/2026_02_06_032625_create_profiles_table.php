@@ -19,7 +19,7 @@ return new class extends Migration
             // مقدار شناسه (کد ملی یا پاسپورت یا کد فراگیر)
             $table->string('n_code', 20)->unique();
 
-            $table->enum('gender', ['male', 'female', 'other'])->nullable();
+            $table->enum('gender', ['Male', 'Female', 'Other'])->nullable();
             $table->string('f_name_fa', 30)->nullable();
             $table->string('l_name_fa', 40)->nullable();
             $table->string('nickname', 30)->nullable();
