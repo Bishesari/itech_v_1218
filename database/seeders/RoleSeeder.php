@@ -13,24 +13,32 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $roles = [
-            ['slug' => 'Newbie',         'name' => 'تازه وارد',       'scope' => 'system',    'color' => 'slate',      'is_active' => true],
-            ['slug' => 'SuperAdmin',     'name' => 'سوپر ادمین',      'scope' => 'system',    'color' => 'red',       'is_active' => true],
-            ['slug' => 'Founder',        'name' => 'موسس',            'scope' => 'institute', 'color' => 'indigo',      'is_active' => true],
-            ['slug' => 'Manager',        'name' => 'مدیر',            'scope' => 'branch',    'color' => 'indigo',      'is_active' => true],
-            ['slug' => 'Assistant',      'name' => 'مسئول اداری',     'scope' => 'branch',    'color' => 'fuchsia',   'is_active' => true],
-            ['slug' => 'Accountant',     'name' => 'حسابدار',         'scope' => 'branch',    'color' => 'orange',    'is_active' => true],
-            ['slug' => 'Teacher',        'name' => 'مربی',            'scope' => 'branch',    'color' => 'amber',     'is_active' => true],
-            ['slug' => 'Student',        'name' => 'کارآموز',         'scope' => 'branch',    'color' => 'lime',      'is_active' => true],
-            ['slug' => 'QuestionMaker',  'name' => 'طراح سوال',       'scope' => 'system',    'color' => 'purple',    'is_active' => true],
-            ['slug' => 'QuestionAuditor', 'name' => 'ممیز سوال',      'scope' => 'system',    'color' => 'violet',    'is_active' => true],
-            ['slug' => 'Examiner',       'name' => 'آزمونگر',         'scope' => 'system',    'color' => 'yellow',    'is_active' => true],
-            ['slug' => 'Marketer',       'name' => 'بازاریاب',        'scope' => 'branch',    'color' => 'green',    'is_active' => true],
-            ['slug' => 'JobSeeker',      'name' => 'کارجو',           'scope' => 'system',    'color' => 'emerald',    'is_active' => true],
-            ['slug' => 'Examinee',       'name' => 'آزمون دهنده',     'scope' => 'system',    'color' => 'sky',    'is_active' => true],
-            ['slug' => 'Employer',       'name' => 'کارفرما',         'scope' => 'system',    'color' => 'cyan',    'is_active' => true],
+            ['slug' => 'newbie',            'name' => 'تازه وارد',        'scope' => 'system',    'color' => 'slate',    'is_active' => true],
+            ['slug' => 'super_admin',       'name' => 'سوپر ادمین',       'scope' => 'system',    'color' => 'red',      'is_active' => true],
+
+            ['slug' => 'founder',           'name' => 'موسس',             'scope' => 'institute', 'color' => 'indigo',   'is_active' => true],
+
+            ['slug' => 'manager',           'name' => 'مدیر',             'scope' => 'branch',    'color' => 'indigo',   'is_active' => true],
+            ['slug' => 'assistant',         'name' => 'مسئول اداری',      'scope' => 'branch',    'color' => 'fuchsia',  'is_active' => true],
+            ['slug' => 'accountant',        'name' => 'حسابدار',          'scope' => 'branch',    'color' => 'orange',   'is_active' => true],
+            ['slug' => 'teacher',           'name' => 'مربی',             'scope' => 'branch',    'color' => 'amber',    'is_active' => true],
+            ['slug' => 'student',           'name' => 'کارآموز',          'scope' => 'branch',    'color' => 'lime',     'is_active' => true],
+            ['slug' => 'marketer',          'name' => 'بازاریاب',         'scope' => 'branch',    'color' => 'green',    'is_active' => true],
+
+            ['slug' => 'question_maker',    'name' => 'طراح سوال',        'scope' => 'institute', 'color' => 'purple',   'is_active' => true],
+            ['slug' => 'question_auditor',  'name' => 'ممیز سوال',        'scope' => 'system',    'color' => 'violet',   'is_active' => true],
+            ['slug' => 'examiner',          'name' => 'آزمونگر',          'scope' => 'system',    'color' => 'yellow',   'is_active' => true],
+
+            ['slug' => 'job_seeker',        'name' => 'کارجو',            'scope' => 'system',    'color' => 'emerald',  'is_active' => true],
+            ['slug' => 'examinee',          'name' => 'آزمون دهنده',      'scope' => 'system',    'color' => 'sky',      'is_active' => true],
+            ['slug' => 'employer',          'name' => 'کارفرما',          'scope' => 'system',    'color' => 'cyan',     'is_active' => true],
         ];
-        foreach ($roles as $data) {
-            Role::create($data);
+
+        foreach ($roles as $role) {
+            Role::updateOrCreate(
+                ['slug' => $role['slug']],
+                $role
+            );
         }
     }
 }

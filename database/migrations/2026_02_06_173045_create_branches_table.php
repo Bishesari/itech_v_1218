@@ -14,34 +14,45 @@ return new class extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
 
+            // وابستگی به موسسه
             $table->foreignId('institute_id')
                 ->constrained()
                 ->cascadeOnDelete()
                 ->index();
 
-            $table->string('code', 7)->unique();
-            $table->char('abbr', 3); // ITC
+            // مشخصات شعبه
             $table->string('short_name', 30);
-            $table->string('full_name', 50);
+            $table->string('code', 7);
 
-            // شعبه اصلی
+            // آیا شعبه اصلی است؟
             $table->boolean('is_main')->default(false)->index();
 
+            // موقعیت جغرافیایی
             $table->foreignId('province_id')->constrained()->cascadeOnDelete();
             $table->foreignId('city_id')->constrained()->cascadeOnDelete();
 
+            // اطلاعات تماس
             $table->string('address', 150)->nullable();
             $table->string('postal_code', 10)->nullable()->index();
-
             $table->string('phone', 15)->nullable();
             $table->string('mobile', 15)->nullable();
 
+            // وضعیت
             $table->boolean('is_active')->default(true)->index();
 
             $table->timestamps();
 
-            // فقط یک شعبهٔ اصلی برای هر موسسه
-            $table->unique(['institute_id', 'is_main'], 'one_main_branch_per_institute');
+            /*
+             |--------------------------------------------------------------------------
+             | Indexes & Constraints
+             |--------------------------------------------------------------------------
+             */
+
+            // کد شعبه فقط در سطح موسسه یکتا باشد
+            $table->unique(['institute_id', 'code'], 'unique_branch_code_per_institute');
+
+            // برای جستجو و UI
+            $table->index(['institute_id', 'short_name']);
         });
     }
 
