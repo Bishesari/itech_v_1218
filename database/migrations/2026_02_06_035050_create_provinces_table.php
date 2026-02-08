@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('provinces', function (Blueprint $table) {
             $table->id();
-            $table->string('name_fa', 40)->unique();   // بوشهر
-            $table->string('name_en', 40)->unique(); // bushehr
+            $table->string('name', 40)->unique();   // بوشهر
+            $table->string('slug', 40)->unique(); // bushehr
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

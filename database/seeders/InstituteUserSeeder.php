@@ -12,6 +12,6 @@ class InstituteUserSeeder extends Seeder
      */
     public function run(): void
     {
-
+        //
     }
 }

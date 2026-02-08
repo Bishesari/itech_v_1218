@@ -10,6 +10,16 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Question extends Model
 {
+    protected $fillable = [
+        'standard_id',
+        'chapter_id',
+        'type',
+        'designer_id',
+        'question_text',
+        'is_frequent_final',
+        'is_active',
+    ];
+
     public function standard(): BelongsTo
     {
         return $this->belongsTo(Standard::class);
@@ -20,19 +30,15 @@ class Question extends Model
         return $this->belongsTo(Chapter::class);
     }
 
-    public function province(): BelongsTo
-    {
-        return $this->belongsTo(Province::class);
-    }
-
-    public function city(): BelongsTo
-    {
-        return $this->belongsTo(City::class);
-    }
 
     public function designer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'designer_id');
+    }
+    // دامنه‌های استفاده از سوال (کشوری / استانی / شهری)
+    public function scopes(): HasMany
+    {
+        return $this->hasMany(QuestionScope::class);
     }
 
     // یک سوال می‌تواند چند گزینه داشته باشد

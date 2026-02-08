@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name_en', 50)->unique();
-            $table->string('name_fa', 50)->unique();
+            $table->string('slug', 50)->unique();
+            $table->string('name', 50)->unique();
             // سطح نقش
             $table->enum('scope', ['system', 'institute', 'branch']);
             $table->string('color', 20)->nullable();

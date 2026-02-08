@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('province_id')->constrained()->cascadeOnDelete();
-            $table->string('name_fa', 40);   // بوشهر
-            $table->string('name_en', 40)->index(); // bushehr
+            $table->string('name', 40);   // بوشهر
+            $table->string('slug', 40)->index(); // bushehr
             $table->boolean('is_active')->default(true);
             $table->timestamps();
 
-            $table->unique(['province_id', 'name_en']);
+            $table->unique(['province_id', 'slug']);
         });
     }
 

@@ -20,11 +20,6 @@ return new class extends Migration
 
             // نوع سوال و سطح
             $table->enum('type', ['written', 'practical']);
-            $table->enum('scope', ['national', 'county']);
-
-            // استان و شهرستان (nullable برای کتبی / ملی)
-            $table->foreignId('province_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('city_id')->nullable()->constrained()->cascadeOnDelete();
 
             // طراح سوال
             $table->foreignId('designer_id')->constrained('users')->cascadeOnDelete();
