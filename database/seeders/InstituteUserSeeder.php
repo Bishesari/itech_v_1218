@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\InstituteUser;
-use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class InstituteUserSeeder extends Seeder
@@ -13,18 +12,16 @@ class InstituteUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $superAdminRole = Role::where('slug', 'super_admin')->firstOrFail();
+        $user_roles = [
+            ['institute_id' => null, 'branch_id' => null, 'user_id' => 1,  'role_id' => 1],
+            ['institute_id' => null, 'branch_id' => null, 'user_id' => 1,  'role_id' => 2],
+            ['institute_id' => 1, 'branch_id' => null, 'user_id' => 2,  'role_id' => 3],
+            ['institute_id' => 1, 'branch_id' => 1, 'user_id' => 1,  'role_id' => 10],
+            ['institute_id' => 1, 'branch_id' => 2, 'user_id' => 1,  'role_id' => 10],
 
-        InstituteUser::updateOrCreate(
-            [
-                'user_id' => 1,
-                'role_id' => $superAdminRole->id,
-            ],
-            [
-                'institute_id' => null,
-                'branch_id' => null,
-                'is_active' => true,
-            ]
-        );
+        ];
+        foreach ($user_roles as $data) {
+            InstituteUser::create($data);
+        }
     }
 }
