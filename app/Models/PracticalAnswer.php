@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class PracticalAnswer extends Model
 {
+    protected $fillable = [
+        'question_id',
+        'description',
+    ];
+
     // هر جواب عملی می‌تواند چند media داشته باشد
     public function media(): MorphMany
     {

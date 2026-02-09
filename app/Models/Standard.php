@@ -22,6 +22,10 @@ class Standard extends Model
         'is_active',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
     public function field(): BelongsTo
     {
         return $this->belongsTo(Field::class);
@@ -30,5 +34,9 @@ class Standard extends Model
     public function chapters(): HasMany
     {
         return $this->hasMany(Chapter::class)->orderBy('number');
+    }
+    public function questions(): HasMany
+    {
+        return $this->hasMany(Question::class);
     }
 }

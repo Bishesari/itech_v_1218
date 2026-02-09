@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Branch;
 use Illuminate\Database\Seeder;
 
 class BranchSeeder extends Seeder
@@ -13,7 +13,12 @@ class BranchSeeder extends Seeder
     public function run(): void
     {
         $branches = [
-            ['institute_id' => 1, 'name' => 'بوشهر', 'slug' => 'Bushehr'],
+            ['institute_id' => 1, 'short_name' => 'شعبه مرکزی', 'code' => 'CEN', 'is_main' => true, 'province_id' => '1', 'city_id' => '1'],
+            ['institute_id' => 1, 'short_name' => 'شعبه نیایش', 'code' => 'NIY', 'is_main' => false, 'province_id' => '1', 'city_id' => '1'],
+            ['institute_id' => 1, 'short_name' => 'شعبه گناوه', 'code' => 'GNV', 'is_main' => false, 'province_id' => '1', 'city_id' => '2'],
         ];
+        foreach ($branches as $branch) {
+            Branch::create($branch);
+        }
     }
 }

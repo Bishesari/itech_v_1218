@@ -7,9 +7,22 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Province extends Model
 {
-    protected $fillable = ['name_fa', 'name_en', 'is_active'];
+    protected $fillable = ['name', 'slug', 'is_active'];
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
     public function cities(): HasMany
     {
         return $this->hasMany(City::class);
+    }
+
+    public function branches(): HasMany
+    {
+        return $this->hasMany(Branch::class);
+    }
+
+    public function questionScopes(): HasMany
+    {
+        return $this->hasMany(QuestionScope::class);
     }
 }

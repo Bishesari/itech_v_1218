@@ -20,6 +20,11 @@ class Question extends Model
         'is_active',
     ];
 
+    protected $casts = [
+        'is_frequent_final' => 'boolean',
+        'is_active' => 'boolean',
+    ];
+
     public function standard(): BelongsTo
     {
         return $this->belongsTo(Standard::class);
@@ -30,11 +35,11 @@ class Question extends Model
         return $this->belongsTo(Chapter::class);
     }
 
-
     public function designer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'designer_id');
     }
+
     // دامنه‌های استفاده از سوال (کشوری / استانی / شهری)
     public function scopes(): HasMany
     {

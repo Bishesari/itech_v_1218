@@ -32,6 +32,7 @@ class Profile extends Model
         'postal_code',
         'image_url',
     ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

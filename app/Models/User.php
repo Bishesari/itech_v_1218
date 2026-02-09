@@ -40,28 +40,37 @@ class User extends Authenticatable
 
     public function contacts(): BelongsToMany
     {
-        return $this->belongsToMany(Contact::class)
+        return $this->belongsToMany(Contact::class, 'contact_user', 'user_id', 'contact_id')
+            ->using(ContactUser::class)
             ->withPivot('is_primary')
             ->withTimestamps();
     }
 
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'institute_user')
+        return $this->belongsToMany(Role::class, 'institute_user', 'user_id', 'role_id')
+            ->using(InstituteUser::class)
             ->withPivot(['institute_id', 'branch_id', 'is_active'])
             ->withTimestamps();
     }
 
     public function institutes(): BelongsToMany
     {
-        return $this->belongsToMany(Institute::class, 'institute_user')
+        return $this->belongsToMany(Institute::class, 'institute_user', 'user_id', 'institute_id')
+            ->using(InstituteUser::class)
             ->distinct();
     }
 
     public function branches(): BelongsToMany
     {
-        return $this->belongsToMany(Branch::class, 'institute_user')
+        return $this->belongsToMany(Branch::class, 'institute_user', 'user_id', 'branch_id')
+            ->using(InstituteUser::class)
             ->distinct();
+    }
+
+    public function designedQuestions(): HasMany
+    {
+        return $this->hasMany(Question::class, 'designer_id');
     }
 
     public function hasRole(string $role, ?Institute $institute = null, ?Branch $branch = null): bool
