@@ -9,8 +9,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts::auth')]
-class Login extends Component
+new #[Layout('layouts::auth')] class extends Component
 {
     public string $user_name = '';
 
@@ -38,7 +37,6 @@ class Login extends Component
 
             return;
         }
-
         session()->regenerate();
         RateLimiter::clear($key);
 
@@ -51,7 +49,6 @@ class Login extends Component
 
             return;
         }
-
         if ($assignments->count() === 1) {
             $this->activateAssignment($assignments->first());
             $this->redirectIntended('dashboard', navigate: true);
@@ -67,25 +64,16 @@ class Login extends Component
 
             return;
         }
-
         $this->redirectRoute('role.select', navigate: true);
     }
-
     protected function activateAssignment($assignment): void
     {
         DB::transaction(function () use ($assignment) {
-
             $user = auth()->user();
-
             $user->assignments()->update(['is_last_selected' => false]);
             $assignment->update(['is_last_selected' => true]);
 
             session(['active_assignment_id' => $assignment->id]);
         });
     }
-
-    public function render()
-    {
-        return view('livewire.auth.login');
-    }
-}
+};
