@@ -14,6 +14,7 @@ class InstituteUser extends Pivot
         'branch_id',
         'user_id',
         'role_id',
+        'is_last_selected',
         'is_active',
     ];
 

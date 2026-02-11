@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -73,6 +74,31 @@ class User extends Authenticatable
         return $this->hasMany(Question::class, 'designer_id');
     }
 
+    public function assignments(): HasMany
+    {
+        return $this->hasMany(InstituteUser::class);
+    }
+
+    public function activeAssignment(): ?InstituteUser
+    {
+        return $this->assignments()
+            ->where('id', session('active_assignment_id'))
+            ->first();
+    }
+
+    public function activeRole(): ?Role
+    {
+        return $this->activeAssignment()?->role;
+    }
+    public function activeBranch(): ?Branch
+    {
+        return $this->activeAssignment()?->branch;
+    }
+
+    public function activeInstitute(): ?Institute
+    {
+        return $this->activeAssignment()?->institute;
+    }
     public function hasRole(string $role, ?Institute $institute = null, ?Branch $branch = null): bool
     {
         return $this->roles()
@@ -83,4 +109,5 @@ class User extends Authenticatable
             )
             ->exists();
     }
+
 }

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('branch_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('role_id')->constrained()->cascadeOnDelete();
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_last_selected')->default(false)->index();
+            $table->boolean('is_active')->default(true)->index();
             $table->timestamps();
 
             $table->unique(['institute_id', 'branch_id', 'user_id', 'role_id'], 'unique_role_assignment');
