@@ -1,4 +1,4 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-Route::livewire('/role-select', 'pages::auth.role-select')->name('role-select')->middleware('auth');
+Route::livewire('/select-context', 'pages::auth.context-select')->middleware('auth')->name('context.select');

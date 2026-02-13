@@ -13,10 +13,10 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $roles = [
-            ['slug' => 'newbie',            'name' => 'تازه وارد',        'scope' => 'system',    'color' => 'slate',    'is_active' => true],
+            ['slug' => 'newbie',            'name' => 'تازه وارد',        'scope' => 'system',    'color' => 'blue',    'is_active' => true],
             ['slug' => 'super_admin',       'name' => 'سوپر ادمین',       'scope' => 'system',    'color' => 'red',      'is_active' => true],
 
-            ['slug' => 'founder',           'name' => 'موسس',             'scope' => 'institute', 'color' => 'indigo',   'is_active' => true],
+            ['slug' => 'founder',           'name' => 'موسس',             'scope' => 'institute', 'color' => 'teal',   'is_active' => true],
 
             ['slug' => 'manager',           'name' => 'مدیر',             'scope' => 'branch',    'color' => 'indigo',   'is_active' => true],
             ['slug' => 'assistant',         'name' => 'مسئول اداری',      'scope' => 'branch',    'color' => 'fuchsia',  'is_active' => true],
